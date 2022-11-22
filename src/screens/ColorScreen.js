@@ -2,13 +2,29 @@ import { View, Text, FlatList } from "react-native";
 import React, { useState } from "react";
 import ColorComponent from "../components/ColorComponent";
 import CustomButton from "../components/CustomButton";
+import { get } from "react-native/Libraries/Utilities/PixelRatio";
 
-const MAX_RGB_VALUE = 255;
+const MAX_RGB_VALUE = 256;
+
+/**
+ * @returns A random number between 0 and 255
+ */
+const getColor = () => {
+  return Math.floor(Math.random() * MAX_RGB_VALUE);
+};
+
+/**
+ * @return A random rgb color
+ */
+const getRgbColor = () => {
+  return `rgb(${getColor()}, ${getColor()}, ${getColor()})`;
+};
 
 const ColorScreen = () => {
   const [colors, setColors] = useState([]);
+
   const handleAddColor = () => {
-    const rgb = `rgb(${getColor()}, ${getColor()}, ${getColor()})`;
+    const rgb = getRgbColor();
     setColors((old) => [
       ...old,
       {
@@ -18,18 +34,24 @@ const ColorScreen = () => {
     ]);
   };
 
-  // Returns a random color between 0 and 255
-  const getColor = () => {
-    return Math.floor(Math.random() * MAX_RGB_VALUE);
+  const handleDelete = (key) => {
+    setColors((old) => {
+      return old.filter((color) => color.key !== key);
+    });
   };
+
   return (
     <View>
       <Text>ColorScreen</Text>
       <CustomButton title="Add Color" onPress={handleAddColor} />
-      <ColorComponent color="rgb(43, 210, 122)" />
       <FlatList
         data={colors}
-        renderItem={({ item }) => <ColorComponent color={item.color} />}
+        renderItem={({ item }) => (
+          <ColorComponent
+            color={item.color}
+            onPress={() => handleDelete(item.key)}
+          />
+        )}
       />
     </View>
   );

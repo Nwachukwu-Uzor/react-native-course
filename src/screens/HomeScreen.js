@@ -36,6 +36,12 @@ const HomeScreen = ({ navigation: { navigate } }) => {
           navigate("Color");
         }}
       />
+      <CustomButton
+        title="Go to Color Adjuster Demo"
+        onPress={() => {
+          navigate("ColorAdjuster");
+        }}
+      />
     </View>
   );
 };

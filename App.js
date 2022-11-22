@@ -1,5 +1,6 @@
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
+import ColorAdjusterScreen from "./src/screens/ColorAdjusterScreen";
 import ColorScreen from "./src/screens/ColorScreen";
 import ComponentScreen from "./src/screens/ComponentScreen";
 import CounterScreen from "./src/screens/CounterScreen";
@@ -14,7 +15,8 @@ const navigator = createStackNavigator(
     FlatList: FlatListScreen,
     Image: ImageScreen,
     Counter: CounterScreen,
-    Color: ColorScreen
+    Color: ColorScreen,
+    ColorAdjuster: ColorAdjusterScreen,
   },
   {
     initialRouteName: "Home",
